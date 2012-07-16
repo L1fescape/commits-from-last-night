@@ -22,7 +22,6 @@ for line in lines:
   if "url" in line:
     remote = line.split("/")
     remote = remote[len(remote)-2] + "/" + remote[len(remote)-1][:-5]
-    print remote
     break
 
 avatar = "http://www.gravatar.com/avatar/"+email
