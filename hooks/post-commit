@@ -21,7 +21,7 @@ for line in p.stdout.readlines():
   message = line,
   retval = p.wait()
 
-if "#fcmln" in message:
+if "#fcfln" in message:
   data = json.dumps({"email":email, "message":message})
   url = "http://akenn.org:9000"
   req = urllib2.Request(url, data, {'Content-Type': 'application/json'})
