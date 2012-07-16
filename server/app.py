@@ -16,6 +16,7 @@ def index():
   if request.method == 'POST':
     email = request.json["email"]
     message = request.json["message"]
+    remote = request.json["remote"]
 
     url = "https://api.github.com/legacy/user/email/"+email
     f = urllib2.urlopen(url)
@@ -29,7 +30,7 @@ def index():
     picture = "http://www.gravatar.com/avatar/"+response['user']['gravatar_id']
     commitId = message
 
-    collection.insert({ "username":username, "realname":realname, "email":email, "picture":picture, "message":message, "commitId":commitId, "time":time })
+    collection.insert({ "username":username, "realname":realname, "email":email, "picture":picture, "message":message, "commitId":commitId, "time":time, "remote":remote })
 
     return ""
   else:

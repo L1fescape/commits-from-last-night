@@ -15,15 +15,24 @@ for line in lines:
     email = email[email.index("=")+1:]
     break
 
+f = open('.git/config')
+lines = f.readlines()
+f.close()
+for line in lines:
+  if "url" in line:
+    remote = line.split("/")
+    remote = remote[len(remote)-2] + "/" + remote[len(remote)-1][:-5]
+    print remote
+    break
+
 avatar = "http://www.gravatar.com/avatar/"+email
 p = subprocess.Popen('git log -1 --oneline', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 for line in p.stdout.readlines():
   message = line,
   retval = p.wait()
-message = message[0]
 
 if "#cfln" in message:
-  data = json.dumps({"email":email, "message":message})
+  data = json.dumps({"email":email, "message":message, "remote": remote})
   url = "http://akenn.org:9000"
   req = urllib2.Request(url, data, {'Content-Type': 'application/json'})
   f = urllib2.urlopen(req)

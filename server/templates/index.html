@@ -50,7 +50,7 @@
 				<div class="name">{{ commit.realname }}</div>
 			</div>
 			<div class="message">
-				{{ commit.message }}
+				<a href="https://github.com/{{ commit.remote }}/commit/{{ commit.commitId }}">{{ commit.message }}</a>
 			</div>
 			<div class="time">
 				{{ commit.time }}
