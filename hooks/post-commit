@@ -21,10 +21,9 @@ for line in p.stdout.readlines():
   message = line,
   retval = p.wait()
 
-if "#fcfln" in message:
-  data = json.dumps({"email":email, "message":message})
-  url = "http://akenn.org:9000"
-  req = urllib2.Request(url, data, {'Content-Type': 'application/json'})
-  f = urllib2.urlopen(req)
-  response = f.read()
-  f.close()
+data = json.dumps({"email":email, "message":message})
+url = "http://akenn.org:9000"
+req = urllib2.Request(url, data, {'Content-Type': 'application/json'})
+f = urllib2.urlopen(req)
+response = f.read()
+f.close()
