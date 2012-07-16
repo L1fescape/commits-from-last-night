@@ -46,8 +46,10 @@
   	{% for commit in commits %}
 		<div class="row">
 			<div class="photo">
-				<img src="{{ commit.picture }}" />
-				<div class="name">{{ commit.realname }}</div>
+				<a href="https://github.com/{{ commit.username }}">
+					<img src="{{ commit.picture }}" />
+					<div class="name">{{ commit.realname }}</div>
+				</a>
 			</div>
 			<div class="message">
 				<a href="https://github.com/{{ commit.remote }}/commit/{{ commit.commitId }}">{{ commit.message }}</a>
