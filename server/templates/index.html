@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Feathr Commits From Last Night</title>
+    <style>
+    	#header {
+    		width:700px;
+    		margin:0 auto;
+    		padding:20px;
+    	}
+    	#body {
+    		width:700px;
+    		margin:0 auto;
+    	}
+    	.row {
+    		padding:20px;
+    		border-bottom:1px solid #333;
+    		position:relative;
+    		min-height:100px;
+    	}
+    	.row .photo {
+    		position:absolute;
+    		top:20px;
+    		left:0px;
+    		text-align: auto;
+    	}
+    	.row .photo img {
+    		margin-left:20px;
+    	}
+    	.row .message {
+    		margin-left:100px;
+    		margin-right:50px;
+    	}
+    	.row .time {
+    		position:absolute;
+    		top:20px;
+    		right:20px;
+    	}
+    	.row .name {
+    		text-align:center;
+    	}
+    </style>
+  </head>
+  <body>
+  	<div id="header"><h1>Feathr Commits From Last Night</h1></div>
+  	<div id="body">
+  	{% for commit in commits %}
+		<div class="row">
+			<div class="photo">
+				<img src="{{ commit.picture }}" />
+				<div class="name">{{ commit.realname }}</div>
+			</div>
+			<div class="message">
+				{{ commit.message }}
+			</div>
+			<div class="time">
+				{{ commit.time }}
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+  </body>
+</html>
