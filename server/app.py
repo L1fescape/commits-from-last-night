@@ -5,6 +5,8 @@ from time import gmtime, strftime
 import pymongo
 import simplejson
 from pymongo import Connection
+import re
+
 
 connection = Connection('localhost', 27017)
 db = connection.commits
@@ -18,6 +20,12 @@ def index():
     message = request.json["message"]
     remote = request.json["remote"]
 
+    message = message.split(" ")
+    commitId = message[0]
+    del message[0]
+    message = " ".join(message)
+    message = re.sub('\#cfln$', '', message)
+
     url = "https://api.github.com/legacy/user/email/"+email
     f = urllib2.urlopen(url)
     response = f.read()
@@ -28,7 +36,6 @@ def index():
     username = response['user']['login']
     time = strftime("%d-%m-%Y %H:%M:%S")
     picture = "http://www.gravatar.com/avatar/"+response['user']['gravatar_id']
-    commitId = message
 
     collection.insert({ "username":username, "realname":realname, "email":email, "picture":picture, "message":message, "commitId":commitId, "time":time, "remote":remote })
 
