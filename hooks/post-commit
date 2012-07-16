@@ -20,6 +20,7 @@ p = subprocess.Popen('git log -1 --oneline', shell=True, stdout=subprocess.PIPE,
 for line in p.stdout.readlines():
   message = line,
   retval = p.wait()
+message = message[0]
 
 if "#cfln" in message:
   data = json.dumps({"email":email, "message":message})
