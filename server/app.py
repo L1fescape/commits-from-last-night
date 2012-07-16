@@ -41,7 +41,7 @@ def index():
 
     return ""
   else:
-    commits = collection.find().sort("time" , -1)
+    commits = collection.find().sort("time" , 1)
     return render_template('index.html', commits=commits)
 
 if __name__ == '__main__':
