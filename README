@@ -8,4 +8,7 @@ PyMongo
 Installation
 -----------
 
+Update <YOUR SITE URL> in hooks/post-commit
+Update <YOUR SITE URL> in server/app.py
+Update <PATH TO SERVER DIRECTORY> in server/wsgiiapp.wsgi
 Copy hooks/post-commit into <git repo>/.git/hooks/
