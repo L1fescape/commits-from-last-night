@@ -4,3 +4,8 @@ Requirements
 Flask
 PyMongo
 
+
+Installation
+-----------
+
+ln -s hooks/post-commit .git/hooks
