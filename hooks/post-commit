@@ -21,7 +21,11 @@ f.close()
 for line in lines:
   if "url" in line:
     remote = line.split("/")
-    remote = remote[len(remote)-2] + "/" + remote[len(remote)-1][:-5]
+    owner = remote[len(remote)-2]
+    if ":" in owner:
+      owner = owner.split(":")
+      owner = owner[len(owner)-1]
+    remote = str(owner) + "/" + remote[len(remote)-1][:-5]
     break
 
 p = subprocess.Popen('git log -1 --oneline', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -32,7 +36,7 @@ message = message[0]
 
 if "#cfln" in message:
   data = json.dumps({"email":email, "message":message, "remote": remote})
-  url = "<YOUR SITE URL>"
+  url = "http://commits.feathrapp.com"
   req = urllib2.Request(url, data, {'Content-Type': 'application/json'})
   f = urllib2.urlopen(req)
   response = f.read()
