@@ -45,5 +45,5 @@ def index():
     return render_template('index.html', commits=commits)
 
 if __name__ == '__main__':
-  app.run("akenn.org", 9000)
+  app.run("<YOUR SITE URL>")
 

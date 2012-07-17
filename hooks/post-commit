@@ -33,7 +33,7 @@ message = message[0]
 
 if "#cfln" in message:
   data = json.dumps({"email":email, "message":message, "remote": remote})
-  url = "http://akenn.org:9000"
+  url = "<YOUR SITE URL>"
   req = urllib2.Request(url, data, {'Content-Type': 'application/json'})
   f = urllib2.urlopen(req)
   response = f.read()
