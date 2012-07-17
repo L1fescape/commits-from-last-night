@@ -8,4 +8,4 @@ PyMongo
 Installation
 -----------
 
-ln -s hooks/post-commit .git/hooks
+Copy hooks/post-commit into <git repo>/.git/hooks/
