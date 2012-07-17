@@ -3,7 +3,7 @@ import smtplib
 import urllib2
 from time import gmtime, strftime
 import pymongo
-import simplejson
+import json
 from pymongo import Connection
 import re
 
