@@ -7,11 +7,13 @@ import simplejson
 from pymongo import Connection
 import re
 
+import settings
 
-connection = Connection('localhost', 27017)
+
+connection = Connection(settings.mongo_domain, settings.mongo_port)
 db = connection.commits
 collection = db.commits
-app = Flask(__name__)
+app = Flask(__name__, template_folder="views")
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -45,5 +47,5 @@ def index():
     return render_template('index.html', commits=commits)
 
 if __name__ == '__main__':
-  app.run("<YOUR SITE URL>")
+  app.run(settings.flask_domain, settings.flask_port)
 

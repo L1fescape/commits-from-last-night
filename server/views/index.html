@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Commits From Last Night</title>
+  </head>
+  <body>
+    <div id="header">
+      <h1>Commits From Last Night</h1>
+    </div>
+  	<div id="body">
+  	{% for commit in commits %}
+		<div class="row">
+			<div class="photo">
+				<a href="https://github.com/{{ commit.username }}">
+					<img src="{{ commit.picture }}" />
+					<div class="name">{{ commit.realname }}</div>
+				</a>
+			</div>
+			<div class="message">
+				<a href="https://github.com/{{ commit.remote }}/commit/{{ commit.commitId }}">{{ commit.message }}</a>
+			</div>
+			<div class="time">
+				{{ commit.time }}
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+  </body>
+</html>

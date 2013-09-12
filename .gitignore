@@ -1,0 +1,3 @@
+*.pyc
+hooks/post-commit
+server/settings.py
