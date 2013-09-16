@@ -13,7 +13,7 @@ import settings
 connection = Connection(settings.mongo_domain, settings.mongo_port)
 db = connection.commits
 collection = db.commits
-app = Flask(__name__, template_folder="views")
+app = Flask(__name__, template_folder="views", static_folder='static', static_url_path='')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():

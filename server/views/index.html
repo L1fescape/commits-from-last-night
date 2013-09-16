@@ -1,28 +1,35 @@
-<html>
-  <head>
-    <title>Commits From Last Night</title>
-  </head>
-  <body>
-    <div id="header">
-      <h1>Commits From Last Night</h1>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <title>Commits From Last Night</title>
+  <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="/css/main.css" type="text/css" />
+</head>
+<body>
+  <div class="header">
+    <h1>Commits From Last Night</h1>
+  </div>
+  <div class="body">
+  {% for commit in commits %}
+  <div class="row">
+    <div class="name">
+      <a href="https://github.com/{{ commit.username }}">
+        <img src="{{ commit.picture }}" />
+        <br />
+        {{ commit.realname }}
+      </a>
     </div>
-  	<div id="body">
-  	{% for commit in commits %}
-		<div class="row">
-			<div class="photo">
-				<a href="https://github.com/{{ commit.username }}">
-					<img src="{{ commit.picture }}" />
-					<div class="name">{{ commit.realname }}</div>
-				</a>
-			</div>
-			<div class="message">
-				<a href="https://github.com/{{ commit.remote }}/commit/{{ commit.commitId }}">{{ commit.message }}</a>
-			</div>
-			<div class="time">
-				{{ commit.time }}
-			</div>
-		</div>
-	{% endfor %}
-	</div>
-  </body>
+    <div class="commit">
+      <span class="message">{{ commit.message }}</span>
+      <br />
+      <span class="time">{{ commit.time }}</span>
+    </div>
+    <div class="link">
+      <a href="https://github.com/{{ commit.remote }}/commit/{{ commit.commitId }}"><img src="/images/link.png" title="Link to commit" /></a>
+    </div>
+  </div>
+{% endfor %}
+</div>
+</body>
 </html>
