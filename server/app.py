@@ -14,7 +14,6 @@ connection = Connection(settings.mongo_domain, settings.mongo_port)
 db = connection.commits
 collection = db.commits
 app = Flask(__name__, template_folder="views")
-app.debug = True
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -33,7 +32,6 @@ def index():
     response = f.read()
     f.close()
     response = simplejson.loads(response)
-    print response
 
     realname = response['name']
     time = strftime("%d-%m-%Y %H:%M:%S")
@@ -41,9 +39,12 @@ def index():
 
     collection.insert({ "username":username, "realname":realname, "picture":picture, "message":message, "commitId":commitId, "time":time, "remote":remote })
 
+    connection.close()
+
     return ""
   else:
     commits = collection.find().sort("time" , -1)
+    connection.close()
     return render_template('index.html', commits=commits)
 
 if __name__ == '__main__':
