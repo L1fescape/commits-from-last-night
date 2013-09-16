@@ -13,12 +13,12 @@ success () {
 }
 
 
-user ' - What is your github email?'
-read -e email
+user ' - What is your github username?'
+read -e username
 user ' - What domain should I post commit messages to? '
 read -r url
 
-sed -e "s/GITHUB_EMAIL/$email/g" -e "s/DOMAIN_URL/$url/g" templates/post-commit.tmpl > hooks/post-commit
+sed -e "s/GITHUB_USERNAME/$username/g" -e "s/DOMAIN_URL/$url/g" templates/post-commit.tmpl > hooks/post-commit
 
 success "Successfully created 'hooks/post-commit'. Yisss."
 

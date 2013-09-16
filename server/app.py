@@ -14,11 +14,12 @@ connection = Connection(settings.mongo_domain, settings.mongo_port)
 db = connection.commits
 collection = db.commits
 app = Flask(__name__, template_folder="views")
+app.debug = True
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
   if request.method == 'POST':
-    email = request.json["email"]
+    username = request.json["username"]
     message = request.json["message"]
     remote = request.json["remote"]
 
@@ -26,20 +27,19 @@ def index():
     commitId = message[0]
     del message[0]
     message = " ".join(message)
-    message = re.sub('\#cfln$', '', message)
 
-    url = "https://api.github.com/legacy/user/email/"+email
+    url = "https://api.github.com/users/"+username
     f = urllib2.urlopen(url)
     response = f.read()
     f.close()
     response = simplejson.loads(response)
+    print response
 
-    realname = response['user']['name']
-    username = response['user']['login']
+    realname = response['name']
     time = strftime("%d-%m-%Y %H:%M:%S")
-    picture = "http://www.gravatar.com/avatar/"+response['user']['gravatar_id']
+    picture = "http://www.gravatar.com/avatar/"+response['gravatar_id']
 
-    collection.insert({ "username":username, "realname":realname, "email":email, "picture":picture, "message":message, "commitId":commitId, "time":time, "remote":remote })
+    collection.insert({ "username":username, "realname":realname, "picture":picture, "message":message, "commitId":commitId, "time":time, "remote":remote })
 
     return ""
   else:
